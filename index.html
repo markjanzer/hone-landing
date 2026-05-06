@@ -187,7 +187,7 @@
       <p class="lede">Everyone deserves a tutor.</p>
       <p class="body">hone is an open source toolkit that turns LLMs into the kind of tutors they should be — with memory across sessions, real pedagogical structure, and spaced practice that helps things stick. For people who want to learn on their own.</p>
 
-      <form id="signup" novalidate>
+      <form id="signup" action="https://buttondown.com/api/emails/embed-subscribe/hone-study" method="post" novalidate>
         <input type="email" name="email" placeholder="you@example.com" required autocomplete="email" aria-label="Email address" />
         <button type="submit">Notify me</button>
       </form>
@@ -219,10 +219,11 @@
         button.disabled = true;
 
         try {
-          // TODO: replace with real Buttondown/Kit endpoint
-          // e.g. fetch('https://api.buttondown.email/v1/subscribers', { ... })
-          console.log('subscribe:', email);
-          await new Promise(r => setTimeout(r, 250));
+          await fetch(form.action, {
+            method: 'POST',
+            mode: 'no-cors',
+            body: new FormData(form),
+          });
 
           form.classList.add('hidden');
           hint.classList.add('hidden');
